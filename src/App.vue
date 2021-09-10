@@ -1,15 +1,39 @@
 <template>
 	<div id="app">
-		<img alt="Vue logo" src="./assets/logo.png" />
+		<input type="text" v-model="query" />
+		<button @click="search">cerca</button>
 	</div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import axios from "axios";
 
 export default {
 	name: "App",
 	components: {},
+	data() {
+		return {
+			query: "",
+			baseUri: "https://api.themoviedb.org/3",
+			apiKey: "561cc2175a0ff92f89627792016b88c4",
+			apiData: [],
+		};
+	},
+	methods: {
+		search() {
+			axios
+				.get(
+					`${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.query}`
+				)
+				.then((res) => {
+					const datas = res.data.results;
+					this.apiData = datas;
+				})
+				.catch(() => {
+					this.error = true;
+				});
+		},
+	},
 };
 </script>
 
