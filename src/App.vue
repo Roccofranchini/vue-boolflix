@@ -3,29 +3,34 @@
 		<input type="text" v-model="query" />
 		<button @click="search">cerca</button>
 		<ul>
-			<ul v-for="film in films" :key="film.id">
-				<li>{{ film.title }}</li>
-				<li>{{ film.original_title }}</li>
-				<li>{{ film.original_language }}</li>
-				<li>{{ film.vote_average }}</li>
-			</ul>
+			<Card v-for="(result, index) in results" :key="index" :result="result" />
 		</ul>
 	</div>
 </template>
 
 <script>
 import axios from "axios";
+import Card from "@/components/Card.vue";
 
 export default {
 	name: "App",
-	components: {},
+	components: {
+		Card,
+	},
 	data() {
 		return {
 			query: "",
 			baseUri: "https://api.themoviedb.org/3",
 			apiKey: "561cc2175a0ff92f89627792016b88c4",
 			films: [],
+			tvs: [],
 		};
+	},
+	computed: {
+		results() {
+			const result = [...this.films, ...this.tvs];
+			return result;
+		},
 	},
 	methods: {
 		search() {
@@ -36,6 +41,15 @@ export default {
 				.then((res) => {
 					const datas = res.data.results;
 					this.films = datas;
+				})
+				.catch(() => {});
+			axios
+				.get(
+					`${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.query}`
+				)
+				.then((res) => {
+					const datas = res.data.results;
+					this.tvs = datas;
 				})
 				.catch(() => {});
 		},
