@@ -1,12 +1,19 @@
 <template>
 	<div id="card">
-		<ul v-if="!result.title">
-			<li>{{ result.name }}</li>
-			<li>{{ result.original_language }}</li>
-		</ul>
-		<ul v-else>
-			<li>{{ result.title }}</li>
-			<li>{{ result.original_language }}</li>
+		<ul>
+			<!-- titolo -->
+			<li v-if="!result.title">{{ result.name }}</li>
+			<li v-else>{{ result.title }}</li>
+			<!-- titolo originale -->
+			<li v-if="!result.title">{{ result.original_name }}</li>
+			<li v-else>{{ result.original_title }}</li>
+			<!-- lingua originale -->
+			<li v-if="result.original_language == ('en' || 'it')">
+				<img :src="`../assets/images/${result.original_language}.png`" alt="" />
+			</li>
+			<li v-else>{{ result.original_language }}</li>
+			<!-- voto -->
+			<li>{{ result.vote_average }}</li>
 		</ul>
 	</div>
 </template>

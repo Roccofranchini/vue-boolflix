@@ -3,7 +3,7 @@
 		<input type="text" v-model="query" />
 		<button @click="search">cerca</button>
 		<ul>
-			<Card v-for="(result, index) in results" :key="index" :result="result" />
+			<Card v-for="result in results" :key="result.id" :result="result" />
 		</ul>
 	</div>
 </template>
