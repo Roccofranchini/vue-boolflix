@@ -8,8 +8,15 @@
 			<li v-if="!result.title">{{ result.original_name }}</li>
 			<li v-else>{{ result.original_title }}</li>
 			<!-- lingua originale -->
-			<li v-if="result.original_language == ('en' || 'it')">
-				<img :src="`../assets/images/${result.original_language}.png`" alt="" />
+			<li
+				v-if="
+					result.original_language == 'en' || result.original_language == 'it'
+				"
+			>
+				<img
+					:src="require(`../assets/images/${result.original_language}.png`)"
+					alt=""
+				/>
 			</li>
 			<li v-else>{{ result.original_language }}</li>
 			<!-- voto -->
@@ -29,5 +36,9 @@ export default {
 #card {
 	border: 1px solid black;
 	margin: 5px;
+
+	img {
+		width: 100px;
+	}
 }
 </style>
