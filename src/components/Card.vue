@@ -1,6 +1,9 @@
 <template>
 	<div id="card">
 		<ul>
+			<li>
+				<img :src="`${imgBaseUrl}${result.poster_path}`" alt="" />
+			</li>
 			<!-- titolo -->
 			<li>{{ result.name || result.title }}</li>
 			<!-- titolo originale -->
@@ -13,13 +16,14 @@
 				"
 			>
 				<img
+					class="flag-img"
 					:src="require(`../assets/images/${result.original_language}.png`)"
 					alt=""
 				/>
 			</li>
 			<li v-else>{{ result.original_language }}</li>
 			<!-- voto -->
-			<li>{{ result.vote_average }}</li>
+			<li>{{ starCount }}</li>
 		</ul>
 	</div>
 </template>
@@ -28,6 +32,25 @@
 export default {
 	name: "Card",
 	props: ["result"],
+	data() {
+		return {
+			imgBaseUrl: "https://image.tmdb.org/t/p/w342",
+		};
+	},
+	computed: {
+		starCount() {
+			const fiveCount = Math.floor(this.result.vote_average / 2);
+			let stars = ``;
+			for (let i = 0; i < 5; i++) {
+				if (i < fiveCount) {
+					stars += '<i class="fas fa-star"></i> ';
+				} else {
+					stars += '<i class="far fa-star"></i> ';
+				}
+			}
+			return stars;
+		},
+	},
 };
 </script>
 
@@ -36,7 +59,7 @@ export default {
 	border: 1px solid black;
 	margin: 5px;
 
-	img {
+	.flag-img {
 		width: 100px;
 	}
 }
