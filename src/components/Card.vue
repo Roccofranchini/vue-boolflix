@@ -23,7 +23,7 @@
 			</li>
 			<li v-else>{{ result.original_language }}</li>
 			<!-- voto -->
-			<li>{{ starCount }}</li>
+			<li v-html="starCount"></li>
 		</ul>
 	</div>
 </template>
