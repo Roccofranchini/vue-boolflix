@@ -2,10 +2,10 @@
 	<header>
 		<div class="row justify-content-between align-items-center h-100">
 			<div class="col d-flex justify-content-start">
-				<span class="logo px-5">BOOLFLIX</span>
+				<span class="logo ps-5">BOOLFLIX</span>
 			</div>
 			<div class="col d-flex justify-content-end">
-				<Search placeholder="cerca.." @search="search" class="px-5" />
+				<Search placeholder="cerca.." @search="search" class="pe-5" />
 			</div>
 		</div>
 	</header>
@@ -28,8 +28,8 @@ export default {
 
 <style scoped lang="scss">
 header {
-	height: 80px;
-	background: grey;
+	height: 100px;
+	background: black;
 	.logo {
 		font-size: 40px;
 		color: red;

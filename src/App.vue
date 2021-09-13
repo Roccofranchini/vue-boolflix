@@ -65,7 +65,9 @@ export default {
 body {
 	text-align: center;
 }
-li {
-	list-style-type: none;
+#app {
+	li {
+		list-style-type: none;
+	}
 }
 </style>

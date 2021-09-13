@@ -1,6 +1,6 @@
 <template>
 	<div id="Search">
-		<div class="input-group mb-3">
+		<div class="input-group">
 			<input
 				type="text"
 				class="form-control"
