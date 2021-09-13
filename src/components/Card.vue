@@ -1,8 +1,11 @@
 <template>
 	<div id="card">
 		<ul>
-			<li>
+			<li v-if="result.poster_path">
 				<img :src="`${imgBaseUrl}${result.poster_path}`" alt="" />
+			</li>
+			<li v-else>
+				<img src="../assets/images/images.png" alt="" class="w-342" />
 			</li>
 			<!-- titolo -->
 			<li>{{ result.name || result.title }}</li>
@@ -23,7 +26,12 @@
 			</li>
 			<li v-else>{{ result.original_language }}</li>
 			<!-- voto -->
-			<li v-html="starCount"></li>
+			<div v-if="result.vote_average !== 0">
+				<span v-for="(n, index) in 5" :key="`${n}-${index}`">
+					<i v-if="starCount < index + 1" class="far fa-star"></i
+					><i v-else class="fas fa-star"></i>
+				</span>
+			</div>
 		</ul>
 	</div>
 </template>
@@ -39,16 +47,8 @@ export default {
 	},
 	computed: {
 		starCount() {
-			const fiveCount = Math.floor(this.result.vote_average / 2);
-			let stars = ``;
-			for (let i = 0; i < 5; i++) {
-				if (i < fiveCount) {
-					stars += '<i class="fas fa-star"></i> ';
-				} else {
-					stars += '<i class="far fa-star"></i> ';
-				}
-			}
-			return stars;
+			const fiveCount = Math.ceil(this.result.vote_average / 2);
+			return fiveCount;
 		},
 	},
 };
@@ -61,6 +61,9 @@ export default {
 
 	.flag-img {
 		width: 100px;
+	}
+	.w-342 {
+		width: 342px;
 	}
 }
 </style>
