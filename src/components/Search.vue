@@ -1,12 +1,24 @@
 <template>
-	<div>
-		<input
-			type="text"
-			v-model="query"
-			:placeholder="placeholder"
-			@keyup.enter="emitSearch"
-		/>
-		<button @click="emitSearch">cerca</button>
+	<div id="Search">
+		<div class="input-group mb-3">
+			<input
+				type="text"
+				class="form-control"
+				v-model="query"
+				@keyup.enter="emitSearch"
+				:placeholder="placeholder"
+				aria-label="Recipient's username"
+				aria-describedby="button-addon2"
+			/>
+			<button
+				class="btn btn-danger x-3"
+				type="button"
+				id="button-addon2"
+				@click="emitSearch"
+			>
+				Cerca
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -27,4 +39,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss"></style>

@@ -1,22 +1,20 @@
 <template>
 	<div id="app">
-		<Search placeholder="cerca.." @search="search" />
-		<ul>
-			<Card v-for="result in results" :key="result.id" :result="result" />
-		</ul>
+		<Header @search="search" />
+		<Main :results="results" />
 	</div>
 </template>
 
 <script>
 import axios from "axios";
-import Card from "@/components/Card.vue";
-import Search from "@/components/Search.vue";
+import Header from "@/components/Header.vue";
+import Main from "@/components/Main.vue";
 
 export default {
 	name: "App",
 	components: {
-		Card,
-		Search,
+		Header,
+		Main,
 	},
 	data() {
 		return {
@@ -62,6 +60,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/bootstrap.scss";
+
 body {
 	text-align: center;
 }
