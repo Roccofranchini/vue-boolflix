@@ -2,11 +2,10 @@
 	<div id="card">
 		<ul>
 			<!-- titolo -->
-			<li v-if="!result.title">{{ result.name }}</li>
-			<li v-else>{{ result.title }}</li>
+			<li>{{ result.name || result.title }}</li>
 			<!-- titolo originale -->
-			<li v-if="!result.title">{{ result.original_name }}</li>
-			<li v-else>{{ result.original_title }}</li>
+			<li>{{ result.original_name || result.original_title }}</li>
+
 			<!-- lingua originale -->
 			<li
 				v-if="

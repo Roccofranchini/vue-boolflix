@@ -1,7 +1,6 @@
 <template>
 	<div id="app">
-		<input type="text" v-model="query" />
-		<button @click="search">cerca</button>
+		<Search placeholder="cerca.." @search="search" />
 		<ul>
 			<Card v-for="result in results" :key="result.id" :result="result" />
 		</ul>
@@ -11,15 +10,16 @@
 <script>
 import axios from "axios";
 import Card from "@/components/Card.vue";
+import Search from "@/components/Search.vue";
 
 export default {
 	name: "App",
 	components: {
 		Card,
+		Search,
 	},
 	data() {
 		return {
-			query: "",
 			baseUri: "https://api.themoviedb.org/3",
 			apiKey: "561cc2175a0ff92f89627792016b88c4",
 			films: [],
@@ -33,23 +33,27 @@ export default {
 		},
 	},
 	methods: {
-		search() {
+		search(query) {
+			if (!query) {
+				this.tvs = this.films = [];
+				return;
+			}
+
+			this.callApi(query, "search/movie", "films");
+			this.callApi(query, "search/tv", "tvs");
+		},
+		callApi(query, endpoint, type) {
+			const params = {
+				params: {
+					query,
+					api_key: this.apiKey,
+					language: "it-IT",
+				},
+			};
 			axios
-				.get(
-					`${this.baseUri}/search/movie?api_key=${this.apiKey}&query=${this.query}`
-				)
+				.get(`${this.baseUri}/${endpoint}`, params)
 				.then((res) => {
-					const datas = res.data.results;
-					this.films = datas;
-				})
-				.catch(() => {});
-			axios
-				.get(
-					`${this.baseUri}/search/tv?api_key=${this.apiKey}&query=${this.query}`
-				)
-				.then((res) => {
-					const datas = res.data.results;
-					this.tvs = datas;
+					this[type] = res.data.results;
 				})
 				.catch(() => {});
 		},
