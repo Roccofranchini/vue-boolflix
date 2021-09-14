@@ -38,8 +38,8 @@
 					<!-- voto -->
 					<li>
 						<div v-if="result.vote_average !== 0">
-							<span v-for="(n, index) in 5" :key="`${n}-${index}`">
-								<i v-if="starCount < index + 1" class="far fa-star"></i
+							<span v-for="n in 5" :key="n">
+								<i v-if="starCount < n" class="far fa-star"></i
 								><i v-else class="fas fa-star"></i>
 							</span>
 						</div>
