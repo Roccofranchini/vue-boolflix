@@ -4,6 +4,7 @@
 			<input
 				type="text"
 				class="form-control"
+				id="search-input"
 				v-model="query"
 				@keyup.enter="emitSearch"
 				:placeholder="placeholder"
@@ -39,4 +40,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#search-input:focus {
+	box-shadow: none;
+	border-color: white;
+	border: 1px solid red;
+}
+</style>
