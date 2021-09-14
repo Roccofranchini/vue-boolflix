@@ -12,7 +12,7 @@
 				<li v-else>
 					<img src="../assets/images/images.png" alt="" class="copertina" />
 				</li>
-				<div class="info h-75 pt-5">
+				<div class="info h-75 pt-5 mt-5">
 					<!-- titolo -->
 					<li>Titolo: {{ item.name || item.title }}</li>
 					<!-- titolo originale -->
@@ -44,6 +44,19 @@
 						</div>
 					</li>
 					<li v-if="item.overview">Overview: {{ item.overview }}</li>
+					<button
+						type="button"
+						class="btn btn-light my-4 w-25"
+						@click="moreInfo"
+					>
+						Cast
+					</button>
+					<ul v-if="cast.length > 0">
+						CAST:
+						<li v-for="(actor, index) in 5" :key="index">
+							{{ cast[index].name }}
+						</li>
+					</ul>
 				</div>
 			</div>
 		</ul>
@@ -51,12 +64,17 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
 	name: "Card",
-	props: ["item"],
+	props: ["item", "endpoint"],
 	data() {
 		return {
 			imgBaseUrl: "https://image.tmdb.org/t/p/w342",
+			cast: [],
+			endp: this.endpoint,
+			itmId: this.item.id,
+			genres: [],
 		};
 	},
 	computed: {
@@ -65,11 +83,26 @@ export default {
 			return fiveCount;
 		},
 	},
+	methods: {
+		moreInfo() {
+			axios
+				.get(
+					`https://api.themoviedb.org/3/${this.endp}/${this.itmId}/credits?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT`
+				)
+				.then((res) => {
+					const cast = res.data.cast;
+					this.cast = cast;
+				});
+		},
+	},
 };
 </script>
 
 <style scoped lang="scss">
 #card {
+	ul {
+		color: honeydew;
+	}
 	li {
 		font-size: 20px;
 		color: honeydew;
@@ -86,6 +119,7 @@ export default {
 	.hover-card:hover .info {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		justify-content: space-around;
 	}
 

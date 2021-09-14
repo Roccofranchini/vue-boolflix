@@ -1,8 +1,18 @@
 <template>
 	<div id="app">
 		<Header @search="search" />
-		<Results v-if="this.films.length > 0" :items="films" title="FILM" />
-		<Results v-if="this.tvs.length > 0" :items="tvs" title="SERIE TV" />
+		<Results
+			v-if="this.films.length > 0"
+			:items="films"
+			title="FILM"
+			endpoint="movie"
+		/>
+		<Results
+			v-if="this.tvs.length > 0"
+			:items="tvs"
+			title="SERIE TV"
+			endpoint="tv"
+		/>
 	</div>
 </template>
 

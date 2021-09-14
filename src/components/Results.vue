@@ -3,7 +3,12 @@
 		<div class="container-fluid py-5">
 			<h2 class="pb-5 ps-4">{{ title }}</h2>
 			<div class="row g-5">
-				<Showcard v-for="item in items" :key="item.id" :item="item" />
+				<Showcard
+					v-for="item in items"
+					:key="item.id"
+					:item="item"
+					:endpoint="endpoint"
+				/>
 			</div>
 		</div>
 	</section>
@@ -14,7 +19,7 @@ import Showcard from "./Showcard.vue";
 
 export default {
 	name: "Result",
-	props: ["items", "title"],
+	props: ["items", "title", "endpoint"],
 	components: {
 		Showcard,
 	},
