@@ -1,20 +1,21 @@
 <template>
 	<div id="app">
 		<Header @search="search" />
-		<Main :results="results" />
+		<Results v-if="this.films.length > 0" :items="films" title="FILM" />
+		<Results v-if="this.tvs.length > 0" :items="tvs" title="SERIE TV" />
 	</div>
 </template>
 
 <script>
 import axios from "axios";
 import Header from "@/components/Header.vue";
-import Main from "@/components/Main.vue";
+import Results from "@/components/Results.vue";
 
 export default {
 	name: "App",
 	components: {
 		Header,
-		Main,
+		Results,
 	},
 	data() {
 		return {
