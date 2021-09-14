@@ -3,20 +3,20 @@
 		<div class="container-fluid py-5">
 			<h2 class="pb-5 ps-4">{{ title }}</h2>
 			<div class="row g-5">
-				<Card v-for="item in items" :key="item.id" :item="item" />
+				<Showcard v-for="item in items" :key="item.id" :item="item" />
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
-import Card from "./Card.vue";
+import Showcard from "./Showcard.vue";
 
 export default {
 	name: "Result",
 	props: ["items", "title"],
 	components: {
-		Card,
+		Showcard,
 	},
 };
 </script>

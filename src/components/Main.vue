@@ -2,20 +2,20 @@
 	<main>
 		<div class="container-fluid py-5">
 			<div class="row g-5">
-				<Card v-for="result in results" :key="result.id" :result="result" />
+				<Showcard v-for="result in results" :key="result.id" :result="result" />
 			</div>
 		</div>
 	</main>
 </template>
 
 <script>
-import Card from "./Card.vue";
+import Showcard from "./Showcard.vue";
 
 export default {
 	name: "Main",
 	props: ["results"],
 	components: {
-		Card,
+		Showcard,
 	},
 };
 </script>
